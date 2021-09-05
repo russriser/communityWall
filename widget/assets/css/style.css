@@ -178,6 +178,21 @@ button.btn--lg,
     transform: rotate(90deg);
 }
 
+#addBtn {
+    height: 4.2rem;
+    width: 4.2rem;
+    padding: 1.1rem;
+}
+
+#addBtn svg {
+    opacity: 0;
+}
+
+#addBtn img {
+    height: 100%;
+    width: auto;
+}
+
 .holder .bottom.fixed-bottom {
     position: fixed;
     bottom: 0;
@@ -491,17 +506,15 @@ button.btn--lg,
     border-radius: 100%;
     object-fit: cover;
 }
-.social-item .social-profile-photo{
-    display: flex;
-    align-items: center;
-    padding: 8px;
-}
 
-.social-item .social-profile-user-photo{
+.social-item .social-profile-user-photo, .social-item .social-profile-photo {
     display: flex;
     align-items: center;
+    padding-bottom: 0.5rem;
+    justify-content: flex-start;
+}
+.social-item .social-profile-info {
     padding: 8px;
-    justify-content: flex-end;
 }
 .social-item .social-copy{
     margin-left: 12px;
@@ -514,18 +527,17 @@ button.btn--lg,
 .social-item .social-copy-user p{
     margin: 0;
     line-height: 1.2;
-    text-align: end;
+    text-align: start;
 }
 
 .social-item .social-copy .time-ago{
     font-size: 12px;
 }
 .social-item .post-text{
-    margin-left: 20px;
-    margin-right: 16px;
+
 }
 .social-item .post-text-user{
-    text-align: end;
+    text-align: start;
 }
 .post-text p{
     word-break: break-word;
@@ -535,20 +547,38 @@ button.btn--lg,
     align-items: center;
     justify-content: space-between;
     padding-top: .5rem;
-    margin-left: 52px;
 }
 .status-footer .social-icon,
-.footer .social-icon {
+.footer .social-icon, .social-item .social-icon {
+    height: 2.75rem;
     display: flex;
     align-items: center;
     padding: .5rem;
     font-size: .75rem;
-    margin-right: .75rem;
+}
+.status-footer .social-icon img, 
+.footer .social-icon img, 
+.social-item .social-icon img {
+    height: 100%;
 }
 .status-footer .social-icon span:not(.active),
 .footer .social-icon span:not(.active){
     color: rgba(150,150,150,.8) !important;
     /* mix-blend-mode: luminosity; */
+}
+
+.post-like {
+    padding-left: 2px;
+}
+
+.post-more {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.post-more span {
+    color: #D8D8D8
 }
 
 .status-footer .icon,
@@ -558,9 +588,12 @@ button.btn--lg,
 }
 
 .social-item {
-    background-color: rgba(255, 255, 255, .1);
+    position: relative;
+    background-color: rgba(255, 255, 255, .4);
     box-shadow: 0 .125rem .5rem rgba(50, 50, 50, 0.2);
-    margin-bottom: .5rem;
+    margin-bottom: 1.25rem;
+    border-radius: 7px;
+    padding: 1rem 1.2rem;
  }
  .side-thread-section .social-item{
     box-shadow: none;
@@ -1053,9 +1086,10 @@ textarea {
 }
 .post-section .post-infinite-scroll,
 .side-thread-section .post-section{
-    padding: .5rem;
+    padding: 1rem;
     height: 100vh;
     overflow: scroll;
+    background-color: #F5F5F5;
 }
 .side-thread-section .post-section{
     padding: 0;

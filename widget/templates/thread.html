@@ -45,14 +45,14 @@
                 </div>
                 <div class="footer">
                     <div class="status-footer">
-                        <a class="more-info social-icon ng-cloak" ng-click="Thread.showMoreOptions()">
+                        <a class="more-info post-more social-icon ng-cloak" ng-click="Thread.showMoreOptions()">
                             <span class="material-icons-outlined">more_horiz</span>
                         </a>
                         
                         <a class="likes social-icon ng-cloak" ng-click="Thread.likeThread(Thread.post, 'thread')">
-                            <i class="material-icons-outlined" ng-class="{notActive: !Thread.post.isUserLikeActive }" aria-hidden="true">thumb_up_off_alt</i>
-                            <span class="iconsTheme iconsFont"
-                                ng-class="{active: Thread.post.isUserLikeActive}">{{Thread.post.likes.length}}</span>
+                            <!-- <i class="material-icons-outlined" ng-class="{notActive: !Thread.post.isUserLikeActive }" aria-hidden="true">thumb_up_off_alt</i> -->
+                            <img ng-if="!Thread.post.isUserLikeActive" src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/praiseInactive.svg" />
+                            <img ng-if="Thread.post.isUserLikeActive" src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/praiseActive.svg" />
                         </a>
                     </div>
                 </div>
@@ -89,9 +89,9 @@
                                     <span class="material-icons-outlined">more_horiz</span>
                                 </a>
                                 <a class="social-icon likes" ng-click="Thread.likeComment(comment, 'comment')">
-                                    <i class="material-icons-outlined" ng-class="{notActive: !comment.isUserLikeActive }" aria-hidden="true">thumb_up_off_alt</i>
-                                    <span class="iconsTheme iconsFont"
-                                        ng-class="{active: comment.isUserLikeActive}">{{comment.likes.length}}</span>
+                                    <!-- <i class="material-icons-outlined" ng-class="{notActive: !comment.isUserLikeActive }" aria-hidden="true">thumb_up_off_alt</i> -->
+                                    <img ng-if="!comment.isUserLikeActive" src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/praiseInactive.svg" />
+                                    <img ng-if="comment.isUserLikeActive" src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/praiseActive.svg" />
                                 </a>
 
                             </div>
@@ -115,6 +115,7 @@
                         d="M11,8.3L2.6,8.8C2.4,8.8,2.3,8.9,2.3,9l-1.2,4.1c-0.2,0.5,0,1.1,0.4,1.5C1.7,14.9,2,15,2.4,15c0.2,0,0.4,0,0.6-0.1l11.2-5.6 C14.8,9,15.1,8.4,15,7.8c-0.1-0.4-0.4-0.8-0.8-1L3,1.1C2.5,0.9,1.9,1,1.5,1.3C1,1.7,0.9,2.3,1.1,2.9L2.3,7c0,0.1,0.2,0.2,0.3,0.2 L11,7.7c0,0,0.3,0,0.3,0.3S11,8.3,11,8.3z">
                     </path>
                 </svg>
+                <img src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/makePost.svg" />
             </button>
         </div>
     </div>

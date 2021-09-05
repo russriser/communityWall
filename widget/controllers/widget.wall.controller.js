@@ -11,7 +11,7 @@
 
             WidgetWall.allowCreateThread = true;
             WidgetWall.allowPrivateChat = false;
-            WidgetWall.allowFollowLeaveGroup = true;
+            WidgetWall.allowFollowLeaveGroup = false;
             WidgetWall.groupFollowingStatus = false;
 
             WidgetWall.threadTag = "thread";
@@ -341,14 +341,14 @@
                         WidgetWall.followLeaveGroupPermission();
                         WidgetWall.setAppTheme();
                         WidgetWall.getPosts();
-                        WidgetWall.SocialItems.authenticateUser(null, (err, user) => {
-                            if (err) return console.error("Getting user failed.", err);
-                            if (user) {
-                                WidgetWall.checkFollowingStatus(user);
-                            } else {
-                                WidgetWall.groupFollowingStatus = false;
-                            }
-                        });
+                        // WidgetWall.SocialItems.authenticateUser(null, (err, user) => {
+                        //     if (err) return console.error("Getting user failed.", err);
+                        //     if (user) {
+                        //         WidgetWall.checkFollowingStatus(user);
+                        //     } else {
+                        //         WidgetWall.groupFollowingStatus = false;
+                        //     }
+                        // });
                     }
                 });
             };

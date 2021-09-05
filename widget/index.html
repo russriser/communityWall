@@ -101,8 +101,18 @@
                                     <div class="head">
                                         <div ng-class="{'social-profile-user-photo': WidgetWall.SocialItems.userDetails.userId == post.userId}"
                                             class="social-profile-photo">
+                                            <div class="media-holder ng-cloak">
+                                                <img ng-if="post.userId && post.userDetails.imageUrl" load-image="1x1"
+                                                    data-final-src="{{post.userDetails.imageUrl}}" crop-width="40"
+                                                    crop-height="40" crop-type="crop">
+                                                <img ng-if="!(post.userId && post.userDetails.imageUrl)"
+                                                    load-image="1x1"
+                                                    data-final-src="../../../styles/media/avatar-placeholder.png"
+                                                    data-img-type="local" crop-width="40" crop-height="40"
+                                                    crop-type="default">
+                                            </div>
                                             <div ng-if="WidgetWall.SocialItems.userDetails.userId == post.userId"
-                                                class="social-profile-photo">
+                                                class="social-profile-photo social-profile-info">
                                                 <div ng-class="{'social-copy-user': WidgetWall.SocialItems.userDetails.userId == post.userId}"
                                                     class="social-copy">
                                                     <p class="text-primary ellipsis">
@@ -116,18 +126,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="media-holder ng-cloak">
-                                                <img ng-if="post.userId && post.userDetails.imageUrl" load-image="1x1"
-                                                    data-final-src="{{post.userDetails.imageUrl}}" crop-width="40"
-                                                    crop-height="40" crop-type="crop">
-                                                <img ng-if="!(post.userId && post.userDetails.imageUrl)"
-                                                    load-image="1x1"
-                                                    data-final-src="../../../styles/media/avatar-placeholder.png"
-                                                    data-img-type="local" crop-width="40" crop-height="40"
-                                                    crop-type="default">
-                                            </div>
                                             <div ng-if="WidgetWall.SocialItems.userDetails.userId != post.userId"
-                                                class="social-profile-photo">
+                                                class="social-profile-photo social-profile-info">
                                                 <div class="social-copy">
                                                     <p class="text-primary ellipsis">
                                                         <a class="ng-cloak"
@@ -166,25 +166,28 @@
                                     <div ng-show="post.userId" class="footer clearfix">
                                         <div class="status">
                                             <div class="status-footer">
-                                                <a class="social-icon ng-cloak"
+                                                <a class="social-icon post-like ng-cloak"
                                                 ng-click="WidgetWall.likeThread(post)">
-                                                <i class="material-icons-outlined" ng-class="{notActive: !post.isUserLikeActive }" aria-hidden="true">thumb_up_off_alt</i>
-                                                <span class="iconsTheme iconsFont"
-                                                ng-class="{notActive: !post.isUserLikeActive}">{{post.likes.length}}</span>
+                                                <!-- <i class="material-icons-outlined" ng-class="{notActive: !post.isUserLikeActive }" aria-hidden="true">thumb_up_off_alt</i> -->
+                                                <img ng-if="!post.isUserLikeActive" src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/praiseInactive.svg" />
+                                                <img ng-if="post.isUserLikeActive" src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/praiseActive.svg" />
+                                                <!-- <span class="iconsTheme iconsFont"
+                                                ng-class="{notActive: !post.isUserLikeActive}">{{post.likes.length}}</span> -->
                                             </a>
                                             
                                             <a ng-if="!WidgetWall.SocialItems.isPrivateChat"
                                                 ng-click=" (!WidgetWall.SocialItems.isPrivateChat) ? WidgetWall.goInToThread(post.id) : return"
                                                 class="social-icon comments ng-cloak">
-                                                <i class="material-icons-outlined icons2Font notActive" aria-hidden="true">chat_bubble_outline</i>
+                                                <!-- <i class="material-icons-outlined icons2Font notActive" aria-hidden="true">chat_bubble_outline</i> -->
+                                                <img src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/comments.svg" />
                                                 <span class="iconsTheme iconsFont">{{post.comments.length}}</span>
-                                            </a>
-                                            <a class="likes social-icon ng-cloak" ng-click="WidgetWall.showMoreOptions(post)">
-                                                <span class="material-icons-outlined">more_horiz</span>
                                             </a>
                                             </div>
                                         </div>
                                     </div>
+                                    <a class="post-more social-icon ng-cloak" ng-click="WidgetWall.showMoreOptions(post)">
+                                        <span class="material-icons-outlined">more_horiz</span>
+                                    </a>
                                 </div>
                                 <div class="loadMorePosts" ng-show="WidgetWall.SocialItems.showMorePosts" ng-click="WidgetWall.loadMorePosts()">
                                     <button><a>Show More</a></button>
@@ -219,6 +222,7 @@
                                     d="M11,8.3L2.6,8.8C2.4,8.8,2.3,8.9,2.3,9l-1.2,4.1c-0.2,0.5,0,1.1,0.4,1.5C1.7,14.9,2,15,2.4,15c0.2,0,0.4,0,0.6-0.1l11.2-5.6 C14.8,9,15.1,8.4,15,7.8c-0.1-0.4-0.4-0.8-0.8-1L3,1.1C2.5,0.9,1.9,1,1.5,1.3C1,1.7,0.9,2.3,1.1,2.9L2.3,7c0,0.1,0.2,0.2,0.3,0.2 L11,7.7c0,0,0.3,0,0.3,0.3S11,8.3,11,8.3z">
                                 </path>
                             </svg>
+                            <img src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/makePost.svg" />
                         </button>
 
 

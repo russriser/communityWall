@@ -4,7 +4,7 @@
   "description": "\"premium-social-plugin\"",
   "scripts": {
     "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS",
-    "build": "gulp build && cd ../ && rm -rf communityWall.zip && zip -r communityWall.zip communityWall_release && rm -rf communityWall_release"
+    "build": "gulp build && cd ../ && rm -rf shmoodyCommunity.zip && zip -r shmoodyCommunity.zip shmoodyCommunity_release && rm -rf shmoodyCommunity_release"
   },
   "keywords": [
     "angularjs",
