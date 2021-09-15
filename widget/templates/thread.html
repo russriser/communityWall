@@ -53,6 +53,8 @@
                             <!-- <i class="material-icons-outlined" ng-class="{notActive: !Thread.post.isUserLikeActive }" aria-hidden="true">thumb_up_off_alt</i> -->
                             <img ng-if="!Thread.post.isUserLikeActive" src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/praiseInactive.svg" />
                             <img ng-if="Thread.post.isUserLikeActive" src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/praiseActive.svg" />
+                            <span class="iconsTheme iconsFont"
+                            ng-class="{notActive: !post.isUserLikeActive}">{{Thread.post.likes.length}}</span>
                         </a>
                     </div>
                 </div>
@@ -92,6 +94,8 @@
                                     <!-- <i class="material-icons-outlined" ng-class="{notActive: !comment.isUserLikeActive }" aria-hidden="true">thumb_up_off_alt</i> -->
                                     <img ng-if="!comment.isUserLikeActive" src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/praiseInactive.svg" />
                                     <img ng-if="comment.isUserLikeActive" src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/praiseActive.svg" />
+                                    <span class="iconsTheme iconsFont"
+                                    ng-class="{notActive: !comment.isUserLikeActive}">{{comment.likes.length}}</span>
                                 </a>
 
                             </div>

@@ -298,10 +298,13 @@
              * @param type
              */
             Thread.scheduleNotification = function (post, text) {
-                SubscribedUsersData.getGroupFollowingStatus(post.userId, Thread.SocialItems.wid, Thread.SocialItems.context.instanceId, function (err, status) {
-                    if (status.length && status[0].data && !status[0].data.leftWall) {
-                        let followsPost = status[0].data.posts.find(el => el === Thread.post.id);
-                        if (followsPost) {
+                // console.log('scheduling notification...')
+                // SubscribedUsersData.getGroupFollowingStatus(post.userId, Thread.SocialItems.wid, Thread.SocialItems.context.instanceId, function (err, status) {
+                //     console.log('follow status: ', status)
+                //     if (status.length && status[0].data && !status[0].data.leftWall) {
+                //         let followsPost = status[0].data.posts.find(el => el === Thread.post.id);
+                //         console.log('follows post: ', followsPost)
+                //         if (followsPost) {
                             let options = {
                                 title: 'Notification',
                                 text: '',
@@ -311,21 +314,20 @@
                             };
 
                             if (text === 'comment')
-                                options.text = Thread.SocialItems.getUserName(Thread.SocialItems.userDetails) + ' commented on post: ' + Thread.SocialItems.context.title;
+                                {options.text = 'Your post received a comment from ' + Thread.SocialItems.getUserName(Thread.SocialItems.userDetails);}
                             else if (text === 'likedComment')
-                                options.text = Thread.SocialItems.getUserName(Thread.SocialItems.userDetails) + ' liked a comment on ' + Thread.SocialItems.context.title;
+                                {options.text = 'Your comment received support from ' + Thread.SocialItems.getUserName(Thread.SocialItems.userDetails);}
                             else if (text === 'likedPost')
-                                options.text = Thread.SocialItems.getUserName(Thread.SocialItems.userDetails) + ' liked a post on ' + Thread.SocialItems.context.title;
+                                {options.text = 'Your post received support from ' + Thread.SocialItems.getUserName(Thread.SocialItems.userDetails);
                             options.inAppMessage = options.text;
-                            options.queryString = `wid=${Thread.SocialItems.wid}`;
+                            options.queryString = `wid=${Thread.SocialItems.wid}`;}
                             buildfire.notifications.pushNotification.schedule(options, function (err) {
                                 if (err) return console.error('Error while setting PN schedule.', err);
                                 console.log("SENT NOTIFICATION", options);
                             });
-                        }
-                    }
-                });
-
+                //         }
+                //     }
+                // });
             }
             Thread.likeThread = function (post) {
                 Thread.SocialItems.authenticateUser(null, (err, userData) => {

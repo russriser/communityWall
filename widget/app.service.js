@@ -383,7 +383,7 @@
                     name = name.substring(0, 25) + '...';
                 return name;
             }
-            SocialItems.prototype.authenticateUser = function (loggedUser, callback) {
+            SocialItems.prototype.authenticateUser = function (loggedUser, callback, initialLoad) {
                 function prepareData(user) {
                     _this.userDetails = {
                         userToken: user.userToken,
@@ -407,7 +407,9 @@
                     if (user) {
                         prepareData(user);
                         return callback(null, user);
-                    } else {
+                    } else if (initialLoad) {
+                        return callback(null, null);
+                    }else {
                         _this.forcedToLogin = true;
                         buildfire.auth.login(null, (err, user) => {
                             if (err) return callback(err, null);

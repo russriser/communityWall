@@ -3,6 +3,54 @@
 (function (angular) {
     angular.module('socialPluginWidget')
         .controller('WidgetWallCtrl', ['$scope', 'SocialDataStore', 'Modals', 'Buildfire', '$rootScope', 'Location', 'EVENTS', 'GROUP_STATUS', 'MORE_MENU_POPUP', 'FILE_UPLOAD', '$modal', 'SocialItems', '$q', '$anchorScroll', '$location', '$timeout', 'Util', 'SubscribedUsersData', function ($scope, SocialDataStore, Modals, Buildfire, $rootScope, Location, EVENTS, GROUP_STATUS, MORE_MENU_POPUP, FILE_UPLOAD, $modal, SocialItems, $q, $anchorScroll, $location, $timeout, util, SubscribedUsersData) {
+            $scope.walls = [
+                {
+                    id: "",
+                    BFinstanceid: "fda52552-49fe-4957-a0fc-0b244422a852-1628195548489",
+                    name: "General Q's"
+                },
+                {
+                    id: "",
+                    BFinstanceid: "fda52552-49fe-4957-a0fc-0b244422a852-1631684914507",
+                    name: "Mood Hacking"
+                },
+                {
+                    id: "",
+                    BFinstanceid: "fda52552-49fe-4957-a0fc-0b244422a852-1631684966423",
+                    name: "Self Improvement"
+                },
+                {
+                    id: "",
+                    BFinstanceid: "fda52552-49fe-4957-a0fc-0b244422a852-1631685003304",
+                    name: "Struggling Lately"
+                },
+                {
+                    id: "",
+                    BFinstanceid: "fda52552-49fe-4957-a0fc-0b244422a852-1631685076531",
+                    name: "Addiction Recovery"
+                },
+                {
+                    id: "",
+                    BFinstanceid: "fda52552-49fe-4957-a0fc-0b244422a852-1631685103636",
+                    name: "Memes"
+                },
+                {
+                    id: "",
+                    BFinstanceid: "fda52552-49fe-4957-a0fc-0b244422a852-1631685130153",
+                    name: "Share a Playlist"
+                },
+                {
+                    id: "",
+                    BFinstanceid: "fda52552-49fe-4957-a0fc-0b244422a852-1631685254576",
+                    name: "Suggestions"
+                }
+            ]
+            $scope.navigateWalls = (wallIndex) => {
+                window.buildfire.navigation.navigateTo({ 
+                    instanceId: $scope.walls[wallIndex].BFinstanceid
+                });
+            }
+            
             var WidgetWall = this;
 
             WidgetWall.userDetails = {};
@@ -118,6 +166,15 @@
                 });
             }
 
+            WidgetWall.showUserLikes = function () {
+                WidgetWall.SocialItems.items.map(item => {
+                    let liked = item.likes.find(like => like === WidgetWall.SocialItems.userDetails.userId);
+                    if (liked) item.isUserLikeActive = true;
+                    else item.isUserLikeActive = false;
+                });
+                $scope.$digest();
+            }
+
             WidgetWall.getPosts = function () {
                 WidgetWall.SocialItems.getPosts(function (err, data) {
                     WidgetWall.showUserLikes();
@@ -128,15 +185,6 @@
                         wid: WidgetWall.SocialItems.wid
                     });
                 });
-            }
-
-            WidgetWall.showUserLikes = function () {
-                WidgetWall.SocialItems.items.map(item => {
-                    let liked = item.likes.find(like => like === WidgetWall.SocialItems.userDetails.userId);
-                    if (liked) item.isUserLikeActive = true;
-                    else item.isUserLikeActive = false;
-                });
-                $scope.$digest();
             }
 
             WidgetWall.checkFollowingStatus = function (user = null) {
@@ -268,7 +316,7 @@
                 if (text === 'post')
                     options.text = WidgetWall.SocialItems.getUserName(WidgetWall.SocialItems.userDetails) + ' added new post on ' + WidgetWall.SocialItems.context.title;
                 else if (text === 'like')
-                    options.text = WidgetWall.SocialItems.getUserName(WidgetWall.SocialItems.userDetails) + ' liked a post on ' + WidgetWall.SocialItems.context.title;
+                    options.text = 'Your post received support from ' + WidgetWall.SocialItems.getUserName(WidgetWall.SocialItems.userDetails);
 
                 options.inAppMessage = options.text;
                 options.queryString = `wid=${WidgetWall.SocialItems.wid}`
@@ -341,14 +389,14 @@
                         WidgetWall.followLeaveGroupPermission();
                         WidgetWall.setAppTheme();
                         WidgetWall.getPosts();
-                        // WidgetWall.SocialItems.authenticateUser(null, (err, user) => {
-                        //     if (err) return console.error("Getting user failed.", err);
-                        //     if (user) {
-                        //         WidgetWall.checkFollowingStatus(user);
-                        //     } else {
-                        //         WidgetWall.groupFollowingStatus = false;
-                        //     }
-                        // });
+                        WidgetWall.SocialItems.authenticateUser(null, (err, user) => {
+                            if (err) return console.error("Getting user failed.", err);
+                            if (user) {
+                                WidgetWall.checkFollowingStatus(user);
+                            } else {
+                                WidgetWall.groupFollowingStatus = false;
+                            }
+                        }, true);
                     }
                 });
             };
@@ -681,6 +729,7 @@
                         pinnedPost: WidgetWall.pinnedPost,
                         wid: WidgetWall.SocialItems.wid
                     });
+                    WidgetWall.showUserLikes();
                     $scope.$digest();
                 });
             }
@@ -706,7 +755,7 @@
                         });
                         postData.id = response.data.id;
                         postData.uniqueLink = response.data.uniqueLink;
-                        WidgetWall.scheduleNotification(postData, 'post');
+                        // WidgetWall.scheduleNotification(postData, 'post');
                         // window.scrollTo(0, 0);
                         // $location.hash('top');
                         // $anchorScroll();
