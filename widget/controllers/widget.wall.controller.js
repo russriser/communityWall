@@ -7,7 +7,7 @@
                 {
                     id: "",
                     BFinstanceid: "fda52552-49fe-4957-a0fc-0b244422a852-1628195548489",
-                    name: "General Q's"
+                    name: "General"
                 },
                 {
                     id: "",
@@ -141,7 +141,7 @@
                 if (typeof (WidgetWall.SocialItems.appSettings.showMembers) == 'undefined')
                     WidgetWall.SocialItems.appSettings.showMembers = true;
                 if (typeof (WidgetWall.SocialItems.appSettings.allowAutoSubscribe) == 'undefined')
-                    WidgetWall.SocialItems.appSettings.allowAutoSubscribe = true;
+                    WidgetWall.SocialItems.appSettings.allowAutoSubscribe = false;
                 if (WidgetWall.SocialItems.appSettings && WidgetWall.SocialItems.appSettings.pinnedPost) {
                     WidgetWall.pinnedPost = WidgetWall.SocialItems.appSettings.pinnedPost;
                     pinnedPost.innerHTML = WidgetWall.pinnedPost;
@@ -187,12 +187,12 @@
                 });
             }
 
-            WidgetWall.checkFollowingStatus = function (user = null) {
+            WidgetWall.checkFollowingStatus = function (user = null, autoSub) {
                 buildfire.spinner.show();
                 SubscribedUsersData.getGroupFollowingStatus(WidgetWall.SocialItems.userDetails.userId, WidgetWall.SocialItems.wid, WidgetWall.SocialItems.context.instanceId, function (err, status) {
                     if (err) console.log('error while getting initial group following status.', err);
                     else {
-                        if (!status.length && WidgetWall.SocialItems.appSettings.allowAutoSubscribe) {
+                        if (!status.length && (WidgetWall.SocialItems.appSettings.allowAutoSubscribe || autoSub)) {
                             buildfire.spinner.hide();
                             return WidgetWall.followWall();
                         }
@@ -755,7 +755,8 @@
                         });
                         postData.id = response.data.id;
                         postData.uniqueLink = response.data.uniqueLink;
-                        // WidgetWall.scheduleNotification(postData, 'post');
+                        WidgetWall.scheduleNotification(postData, 'post');
+                        WidgetWall.checkFollowingStatus(null, true);
                         // window.scrollTo(0, 0);
                         // $location.hash('top');
                         // $anchorScroll();
