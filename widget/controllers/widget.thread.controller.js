@@ -310,7 +310,8 @@
                                 text: '',
                                 at: new Date(),
                                 users: [post.userId],
-                                sendToSelf: false
+                                sendToSelf: false,
+                                queryString: `threadPostUniqueLink=${post.id}`
                             };
 
                             if (text === 'comment')
@@ -319,8 +320,9 @@
                                 {options.text = 'Your comment received support from ' + Thread.SocialItems.getUserName(Thread.SocialItems.userDetails);}
                             else if (text === 'likedPost')
                                 {options.text = 'Your post received support from ' + Thread.SocialItems.getUserName(Thread.SocialItems.userDetails);
-                            options.inAppMessage = options.text;
-                            options.queryString = `wid=${Thread.SocialItems.wid}`;}
+                            options.inAppMessage = options.text;}
+                            // options.queryString = `wid=${Thread.SocialItems.wid}`;}
+                            console.log('Sending notification. Options: ', options);
                             buildfire.notifications.pushNotification.schedule(options, function (err) {
                                 if (err) return console.error('Error while setting PN schedule.', err);
                                 console.log("SENT NOTIFICATION", options);

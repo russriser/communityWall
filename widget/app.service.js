@@ -364,6 +364,11 @@
                 _this.forcedToLogin = false;
                 _this.languages = {};
                 _this.showMorePosts = false;
+                _this.ranNotificationNav = false;
+                _this.navigationURL = "no URL";
+                _this.queryInstance = "no query";
+                _this.queryPostId = "no PostId";
+                _this.shouldNav = false;
                 _this.pageSize = 5;
                 _this.page = 0;
             };
@@ -449,13 +454,13 @@
                         _this.showMorePosts = false;
                         $rootScope.$digest();
                         callback(null, [])
-                        //Checking if user comming from notification for thread comment.
                         startBackgroundService();
-                        if (window.URLSearchParams && window.location.search) {
-                            var queryParamsInstance = new URLSearchParams(window.location.search);
-                            var postId = queryParamsInstance.get('threadPostUniqueLink');
-                            if (postId) location.href = '#/thread/' + postId;
-                        }
+                    }
+                    //Checking if user comming from notification for thread comment.
+                    if (window.URLSearchParams && window.location.search) {
+                        var queryParamsInstance = new URLSearchParams(window.location.search);
+                        var postId = queryParamsInstance.get('threadPostUniqueLink');
+                        if (postId) location.href = '#/thread/' + postId;
                     }
                 });
             }

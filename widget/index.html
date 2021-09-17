@@ -75,9 +75,15 @@
                         </div>
                         <div class="wall-content" ng-class="{isPrivateChat: WidgetWall.SocialItems.isPrivateChat}">
                             <div class="topic-nav" ng-show="!WidgetWall.SocialItems.isPrivateChat">
-                                <button ng-click="navigateWalls($index)" ng-repeat="wall in walls" ng-class="{selected: wall.BFinstanceid == WidgetWall.SocialItems.context.instanceId}"><strong>{{wall.name}}</strong></button>
+                                <button 
+                                    class="wallSelectButton"
+                                    ng-click="navigateWalls($index)" 
+                                    ng-repeat="wall in walls" 
+                                    ng-class="{selected: wall.BFinstanceid == WidgetWall.SocialItems.context.instanceId}"
+                                    ng-attr-id="{{wall.BFinstanceid}}">
+                                    <strong>{{wall.name}}</strong>
+                                </button>
                             </div>
-                            <span>{{testText}}</span>
                             <div ng-class="{'has-comment-box':WidgetWall.SocialItems.userDetails.userId == null || WidgetWall.allowCreateThread,'has-group-header' : WidgetWall.allowFollowLeaveGroup, isPrivateChat: WidgetWall.SocialItems.isPrivateChat}"
                                 class="post-section backgroundColorTheme">
                                 <div class="post-infinite-scroll" id="top">

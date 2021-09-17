@@ -48,13 +48,40 @@
                     id: "",
                     BFinstanceid: "fda52552-49fe-4957-a0fc-0b244422a852-1631685254576",
                     name: "Suggestions"
-                }
+                },
+                // {
+                //     id: "",
+                //     BFinstanceid: "8a723dc3-5d54-4b03-a910-7663ed050a5d-1631600849930",
+                //     name: "Dev"
+                // }
             ]
             $scope.navigateWalls = (wallIndex) => {
                 window.buildfire.navigation.navigateTo({ 
                     instanceId: $scope.walls[wallIndex].BFinstanceid
                 });
             }
+            $scope.scrollToWall = () => {
+                $scope.interval = setInterval(() => {
+                    const allWalls = document.getElementsByClassName("wallSelectButton");
+                    if (Array.from(allWalls).length) {
+                        Array.from(allWalls).forEach(wallButton => {
+                            if (wallButton.id === WidgetWall.SocialItems.context.instanceId) {
+                                wallButton.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+                            }
+                        })
+                        clearInterval($scope.interval);
+                    }
+                }, 250)
+            }
+
+            // angular.element(document).ready(() => {
+            //     const allWalls = document.getElementsByClassName("wallSelectButton");
+            //     Array.from(allWalls).forEach(wallButton => {
+            //         if (wallButton.id === WidgetWall.SocialItems.context.instanceId) {
+            //             wallButton.scrollIntoView({block: "start", inline: "start"});
+            //         }
+            //     })
+            // });
             
             
             var WidgetWall = this;
@@ -411,6 +438,7 @@
                         }, true);
                     }
                 });
+                $scope.scrollToWall();
             };
 
             WidgetWall.init();
