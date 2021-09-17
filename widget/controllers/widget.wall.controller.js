@@ -141,7 +141,7 @@
                 if (typeof (WidgetWall.SocialItems.appSettings.showMembers) == 'undefined')
                     WidgetWall.SocialItems.appSettings.showMembers = true;
                 if (typeof (WidgetWall.SocialItems.appSettings.allowAutoSubscribe) == 'undefined')
-                    WidgetWall.SocialItems.appSettings.allowAutoSubscribe = false;
+                    WidgetWall.SocialItems.appSettings.allowAutoSubscribe = true;
                 if (WidgetWall.SocialItems.appSettings && WidgetWall.SocialItems.appSettings.pinnedPost) {
                     WidgetWall.pinnedPost = WidgetWall.SocialItems.appSettings.pinnedPost;
                     pinnedPost.innerHTML = WidgetWall.pinnedPost;
@@ -154,12 +154,14 @@
             WidgetWall.setAppTheme = function () {
                 buildfire.appearance.getAppTheme((err, obj) => {
                     let elements = document.getElementsByTagName('svg');
-                    for (var i = 0; i < elements.length; i++) {
+                    console.log('svg elements: ', elements);
+                    elements[0].style.setProperty('fill', `rgba(29, 29, 29, 0.9)`, "important");
+                    for (var i = 1; i < elements.length; i++) {
                         elements[i].style.setProperty("fill", obj.colors.icons, "important");
                     }
                     WidgetWall.appTheme = obj.colors;
                     elements[2].style.setProperty("fill", obj.colors.titleBarTextAndIcons, "important");
-                    document.getElementById('followBtn').style.setProperty("background-color", obj.colors.icons, "important");
+                    // document.getElementById('followBtn').style.setProperty("background-color", obj.colors.icons, "important");
                     document.getElementById('addBtn').style.setProperty("background-color", obj.colors.icons, "important");
                     document.getElementById('socialHeader').style.setProperty("background-color", obj.colors.backgroundColor, "important");
                     WidgetWall.loadedPlugin = true;
@@ -193,23 +195,27 @@
                     if (err) console.log('error while getting initial group following status.', err);
                     else {
                         if (!status.length && (WidgetWall.SocialItems.appSettings.allowAutoSubscribe || autoSub)) {
+                            console.log('trying to follow?')
                             buildfire.spinner.hide();
                             return WidgetWall.followWall();
                         }
-                        if (status.length && !status[0].data.leftWall) {
-                            buildfire.notifications.pushNotification.subscribe(
-                                {
-                                    groupName: WidgetWall.SocialItems.wid === '' ?
-                                        WidgetWall.SocialItems.context.instanceId : WidgetWall.SocialItems.wid
-                                }, () => { });
+                        if (status.length) {
                             WidgetWall.groupFollowingStatus = true;
-                        } else {
-                            if (status[0].data.banned) {
+                            if (status[0].data.leftWall) {
+                                // buildfire.notifications.pushNotification.subscribe(
+                                //     {
+                                //         groupName: WidgetWall.SocialItems.wid === '' ?
+                                //             WidgetWall.SocialItems.context.instanceId : WidgetWall.SocialItems.wid
+                                //     }, () => { });
+                                WidgetWall.groupFollowingStatus = false;
+                            } else if (status[0].data.banned) {
                                 WidgetWall.SocialItems.userBanned = true;
                                 WidgetWall.allowFollowLeaveGroup = false;
                                 WidgetWall.allowCreateThread = false;
                                 WidgetWall.SocialItems.appSettings.showMembers = false;
+                                WidgetWall.groupFollowingStatus = false;
                             }
+                        } else {
                             WidgetWall.groupFollowingStatus = false;
                         }
                         WidgetWall.showHideCommentBox();
@@ -948,13 +954,13 @@
             };
 
             WidgetWall.goInToThread = function (threadId) {
-
                 WidgetWall.SocialItems.authenticateUser(null, (err, user) => {
                     if (err) return console.error("Getting user failed.", err);
                     if (user) {
                         WidgetWall.checkFollowingStatus();
-                        if (threadId && !WidgetWall.SocialItems.userBanned)
+                        if (threadId && !WidgetWall.SocialItems.userBanned) {
                             Location.go('#/thread/' + threadId);
+                        }
                     }
                 });
             };

@@ -15,7 +15,7 @@ hgroup,menu,nav,section {
 body {
     line-height: 1;
     height: 100%;
-    overflow: hidden !important;
+    /* overflow: hidden !important; */
     position: absolute;
     top: 0%;
     right: 0;
@@ -43,21 +43,16 @@ html{
     font-size: 16px !important;
 }
 /* Fixed Bottom */
-.main_view,.main-thread-section{height: 100%; overflow: hidden !important;}
+.main_view,.main-thread-section{
+    height: 100%; 
+    /* overflow: hidden !important; */
+}
 .holder.has-bottom {
     padding-bottom: 38px !important;
 }
 
 .holder.has-bottom.has-bottom-viewing {
     padding-bottom: 65px !important;
-}
-
-.wall-content {
-    padding-top: 3rem;
-}
-
-.wall-content.isPrivateChat {
-    padding-top: 0;
 }
 
 .topic-nav {
@@ -67,6 +62,9 @@ html{
     flex-flow: nowrap;
     overflow-x: scroll;
     padding: 2rem 0.5rem;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
 }
 
 .topic-nav button {
@@ -480,10 +478,13 @@ button.btn--lg,
 }
 
 .social-plugin .head-btn {
-    position: fixed;
+    position: -webkit-sticky;
+    position: sticky;
+    top: -3rem;
     width:100%;
     z-index: 2;
     height: 45px;
+    padding: 0.5rem 1rem;
 }
 .social-plugin .head-btn2 {
     width:100%;
@@ -493,10 +494,25 @@ button.btn--lg,
 }
 
 .social-plugin .head-btn a{
-    padding: .75rem;
+    height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center; 
+}
+
+.social-plugin .head-btn a p {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#followBtn {
+    height: 25px;
+}
+
+#membersSvg {
+    height: 30px;
 }
 
 .social-plugin .head-btn2 a{
@@ -1116,14 +1132,14 @@ textarea {
     height:100%;
     width: 100%;
     overflow-x:hidden;
-    overflow-y:hidden;
+    /* overflow-y:hidden; */
     -webkit-overflow-scrolling:touch;
 }
 .post-section .post-infinite-scroll,
 .side-thread-section .post-section{
     padding: 1rem;
-    height: 100vh;
-    overflow: scroll;
+    /* height: 100vh; */
+    /* overflow: scroll; */
     background-color: #F5F5F5;
 }
 .side-thread-section .post-section{
@@ -1131,27 +1147,29 @@ textarea {
 }
 .has-group-header.post-section .post-infinite-scroll {
     padding-top: 0;
-    height: 90vh;
+    /* height: 90vh; */
 }
 .has-group-header.post-section.isPrivateChat .post-infinite-scroll {
-    height: 100vh;
+    /* height: 100vh; */
     padding-top: 2rem;
 }
 .side-thread-section .has-group-header.post-section{
-    padding-top: 3rem;
+    /* padding-top: 3rem; */
 }
 .has-comment-box .post-infinite-scroll,
 .side-thread-section .has-comment-box.post-section{
-    padding-bottom: 6rem;   
+    /* padding-bottom: 3rem;    */
 }
 
 .side-thread-section{
     height:100%;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .side-thread-section .post-section{
-    overflow-y: scroll !important;
+    /* overflow-y: scroll !important; */
+    padding: 0;
+    background-color: whitesmoke !important;
 }
 /* Comment Box */
 .small-post-box{
@@ -1391,7 +1409,7 @@ html[buildfire][safe-area="true"] body {
 }
 
 .head-btn, .post-section, .social-wall {
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .empty_state {

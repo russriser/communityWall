@@ -52,35 +52,25 @@
                         " 
                         ng-class="{'head-btn': WidgetWall.allowFollowLeaveGroup, 'head-btn2': !WidgetWall.allowFollowLeaveGroup}" class="text-center" id="socialHeader">
                             <a>
-                                <div>
-                                    <p class="text-primary" ng-click="WidgetWall.followUnfollow()"  ng-show="WidgetWall.allowFollowLeaveGroup"
-                                    style="
-                                        left: 0;
-                                        top: 0;
-                                        position: absolute;
-                                        padding-left: 15px;
-                                        margin: 5px;
-                                        margin-left: 0;"
-                                        >
-                                        
-                                        <button class="btn btn-primary" id="followBtn" style="display: flex; font-size: 13px;">
-                                            <span class="plusMinusIcon" >{{WidgetWall.groupFollowingStatus ? '&#8722;' : '&#43;'}}</span>
-                                            {{WidgetWall.groupFollowingStatus ? (WidgetWall.SocialItems.languages.leaveGroup) : WidgetWall.SocialItems.languages.joinGroup}}
-                                        </button>                                    
-                                    </p>
-                                    <p class="text-primary" ng-show="WidgetWall.SocialItems.appSettings.showMembers" ng-click="WidgetWall.showMembers()" style="margin-bottom :0px;
-                                        width: 2em;
-                                        right: 1em;
-                                        position: absolute;
-                                        ">
-                                        <svg class="svgIcon" id="membersSvg" viewBox="0 0 24 24">
-                                            <path
-                                                d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z">
-                                            </path>
-                                        </svg>
-                                    </p>
-                                </div>
-
+                                <p class="text-primary" ng-click="WidgetWall.followUnfollow()"  ng-show="WidgetWall.allowFollowLeaveGroup">    
+                                    <!-- <button class="btn btn-primary" id="followBtn" style="display: flex; font-size: 13px;"> -->
+                                        <!-- <span class="plusMinusIcon" >{{WidgetWall.groupFollowingStatus ? '&#8722;' : '&#43;'}}</span>
+                                        {{WidgetWall.groupFollowingStatus ? (WidgetWall.SocialItems.languages.leaveGroup) : WidgetWall.SocialItems.languages.joinGroup}} -->
+                                        <img id="followBtn" ng-if="!WidgetWall.groupFollowingStatus" src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/Join.svg" />
+                                        <img id="followBtn" ng-if="WidgetWall.groupFollowingStatus" src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/Joined.svg" />
+                                    <!-- </button>                                     -->
+                                </p>
+                                <p class="text-primary" ng-show="WidgetWall.SocialItems.appSettings.showMembers" ng-click="WidgetWall.showMembers()" style="margin-bottom :0px;
+                                    width: 2em;
+                                    right: 1em;
+                                    position: absolute;
+                                    ">
+                                    <svg class="svgIcon" id="membersSvg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z">
+                                        </path>
+                                    </svg>
+                                </p>
                             </a>
                         </div>
                         <div class="wall-content" ng-class="{isPrivateChat: WidgetWall.SocialItems.isPrivateChat}">
@@ -172,21 +162,21 @@
                                             <div class="status">
                                                 <div class="status-footer">
                                                     <a class="social-icon post-like ng-cloak"
-                                                    ng-click="WidgetWall.likeThread(post)">
-                                                    <!-- <i class="material-icons-outlined" ng-class="{notActive: !post.isUserLikeActive }" aria-hidden="true">thumb_up_off_alt</i> -->
-                                                    <img ng-if="!post.isUserLikeActive" src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/praiseInactive.svg" />
-                                                    <img ng-if="post.isUserLikeActive" src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/praiseActive.svg" />
-                                                    <span class="iconsTheme iconsFont"
-                                                    ng-class="{notActive: !post.isUserLikeActive}">{{post.likes.length}}</span>
-                                                </a>
-                                                
-                                                <a ng-if="!WidgetWall.SocialItems.isPrivateChat"
-                                                    ng-click=" (!WidgetWall.SocialItems.isPrivateChat) ? WidgetWall.goInToThread(post.id) : return"
-                                                    class="social-icon comments ng-cloak">
-                                                    <!-- <i class="material-icons-outlined icons2Font notActive" aria-hidden="true">chat_bubble_outline</i> -->
-                                                    <img src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/comments.svg" />
-                                                    <span class="iconsTheme iconsFont">{{post.comments.length}}</span>
-                                                </a>
+                                                        ng-click="WidgetWall.likeThread(post)">
+                                                        <!-- <i class="material-icons-outlined" ng-class="{notActive: !post.isUserLikeActive }" aria-hidden="true">thumb_up_off_alt</i> -->
+                                                        <img ng-if="!post.isUserLikeActive" src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/praiseInactive.svg" />
+                                                        <img ng-if="post.isUserLikeActive" src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/praiseActive.svg" />
+                                                        <span class="iconsTheme iconsFont"
+                                                        ng-class="{notActive: !post.isUserLikeActive}">{{post.likes.length}}</span>
+                                                    </a>
+                                                    
+                                                    <a ng-if="!WidgetWall.SocialItems.isPrivateChat"
+                                                        ng-click=" (!WidgetWall.SocialItems.isPrivateChat) ? WidgetWall.goInToThread(post.id) : return"
+                                                        class="social-icon comments ng-cloak">
+                                                        <!-- <i class="material-icons-outlined icons2Font notActive" aria-hidden="true">chat_bubble_outline</i> -->
+                                                        <img src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/comments.svg" />
+                                                        <span class="iconsTheme iconsFont">{{post.comments.length}}</span>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
