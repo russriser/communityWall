@@ -216,6 +216,7 @@ button.btn--lg,
     height: 4.2rem;
     width: 4.2rem;
     padding: 1.1rem;
+    bottom: 5.5rem;
 }
 
 #addBtn svg {
@@ -1141,6 +1142,7 @@ textarea {
     /* height: 100vh; */
     /* overflow: scroll; */
     background-color: #F5F5F5;
+    padding-bottom: 10rem;
 }
 .side-thread-section .post-section{
     padding: 0;
@@ -1168,7 +1170,7 @@ textarea {
 
 .side-thread-section .post-section{
     /* overflow-y: scroll !important; */
-    padding: 0;
+    padding: 0 0 10rem;
     background-color: whitesmoke !important;
 }
 /* Comment Box */
@@ -1418,4 +1420,49 @@ html[buildfire][safe-area="true"] body {
     background-repeat: no-repeat !important;
     background-attachment: absolute !important;
     background-position: center !important;
+}
+
+.navBar {
+    position: fixed;
+    bottom: 0px;
+    z-index: 5;
+    width: 100%;
+    height: 13.5vh;
+    justify-content: space-between;
+    display: flex;
+    align-items: flex-end;
+    padding: 0.75rem;
+    background-image: url("https://shmoodyimagestore.s3.us-east-2.amazonaws.com/navbarBackground.png");
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+    background-size: 100% 100%;
+    filter: drop-shadow(2px 4px 7px rgba(0, 0, 0, 0.2));
+}
+.navBar button {
+    height: 100%;
+    width: 30%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 12.5px;
+    padding: 0;
+    margin: 0;
+}
+.navBar button img {
+    width: 55px;
+    max-height: 35px;
+    object-fit: contain;
+    object-position: bottom;
+}
+.navBar button span {
+    font-size: 12px;
+    color: rgb(29, 29, 29);
+}
+.navBar #centerButton img {
+    padding: 0;
+    width: 90%;
+    max-height: 60%;
+    object-fit: contain;
+    object-position: bottom;
 }
