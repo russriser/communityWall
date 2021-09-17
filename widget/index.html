@@ -229,28 +229,34 @@
 
 
             </div>
+            <div class="navBar">
+                <!-- <button ng-repeat="plugin in plugins" ng-attr-id="{{plugin.position}}">
+                    <img 
+                    ng-src="{{plugin.navIcon}}"
+                    ng-click="(plugin.inactive) ? return : navBF(plugin.instanceId)" />
+                    <span class='buttonLabel'>{{plugin.name}}</span>
+                </button> -->
+                <button id="leftButton">
+                    <img src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/community.svg" />
+                    <span class='buttonLabel'>Community</span>
+                </button>
+                <button id="centerButton">
+                    <img  
+                      src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/toolkit.svg"
+                      ng-click="navBF('Home')" />
+                    <span class='buttonLabel'>Home</span>
+                </button>
+                <button id="rightButton">
+                    <img  
+                      src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/challenges.svg"
+                      ng-click="navBF('ba4139dd-09c6-4121-aa4a-c72570af07fc-1614118652665')" />
+                    <span class='buttonLabel'>Challenges</span>
+                </button>
+            </div>
         </div>
         <div class="slide-left side-thread-section" ng-view="" ng-hide="showThread">
             <h5 class="titleBarTheme text-center" style="margin-top: 35px;">Something went wrong!! Please try again</h5>
         </div>
-        <div class="navBar">
-            <button id="leftButton">
-                <img src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/community.svg" />
-                <span class='buttonLabel'>Community</span>
-            </button>
-            <button id="centerButton">
-                <img  
-                  src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/toolkit.svg"
-                  ng-click="navBF('b881a182-2a81-44f6-a6b7-321c39b4e602-1626725121187')" />
-                <span class='buttonLabel'>Home</span>
-            </button>
-            <button id="rightButton">
-                <img  
-                  src="https://shmoodyimagestore.s3.us-east-2.amazonaws.com/challenges.svg"
-                  ng-click="navBF('ba4139dd-09c6-4121-aa4a-c72570af07fc-1614118652665')" />
-                <span class='buttonLabel'>Challenges</span>
-            </button>
-          </div>
     </div>
     <script>
         buildfire.appearance.titlebar.show();
