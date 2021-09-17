@@ -41,7 +41,12 @@
                 {
                     id: "",
                     BFinstanceid: "fda52552-49fe-4957-a0fc-0b244422a852-1631684914507",
-                    name: "Mood Hacking"
+                    name: "Space to Vent"
+                },
+                {
+                    id: "",
+                    BFinstanceid: "fda52552-49fe-4957-a0fc-0b244422a852-1631890578811",
+                    name: "Gratitude"
                 },
                 {
                     id: "",
@@ -349,7 +354,7 @@
                 };
 
                 if (text === 'post')
-                    options.text = WidgetWall.SocialItems.getUserName(WidgetWall.SocialItems.userDetails) + ' added new post on ' + WidgetWall.SocialItems.context.title;
+                    options.text = WidgetWall.SocialItems.getUserName(WidgetWall.SocialItems.userDetails) + ' added a new post on ' + WidgetWall.SocialItems.context.title;
                 else if (text === 'like')
                     options.text = 'Your post received support from ' + WidgetWall.SocialItems.getUserName(WidgetWall.SocialItems.userDetails);
 
@@ -367,7 +372,7 @@
                         if (err) console.error('Error while getting initial group following status.', err);
                         if (status.length && status[0].data && !status[0].data.leftWall) {
                             options.users.push(userToSend);
-                            options.text = WidgetWall.SocialItems.getUserName(WidgetWall.SocialItems.userDetails) + ' added new post on '
+                            options.text = WidgetWall.SocialItems.getUserName(WidgetWall.SocialItems.userDetails) + ' added a new post on '
                                 + WidgetWall.SocialItems.getUserName(WidgetWall.SocialItems.userDetails) + ' | ' + WidgetWall.SocialItems.getUserName(status[0].data.userDetails);
                             buildfire.notifications.pushNotification.schedule(options, function (err) {
                                 if (err) return console.error('Error while setting PN schedule.', err);
@@ -377,7 +382,7 @@
                             buildfire.auth.getUserProfile({ userId: userToSend }, (err, user) => {
                                 if (err) return console.error(err);
                                 options.users.push(userToSend);
-                                options.text = WidgetWall.SocialItems.getUserName(WidgetWall.SocialItems.userDetails) + ' added new post on '
+                                options.text = WidgetWall.SocialItems.getUserName(WidgetWall.SocialItems.userDetails) + ' added a new post on '
                                     + WidgetWall.SocialItems.getUserName(WidgetWall.SocialItems.userDetails) + ' | ' + WidgetWall.SocialItems.getUserName(user);
                                 buildfire.notifications.pushNotification.schedule(options, function (err) {
                                     if (err) return console.error('Error while setting PN schedule.', err);
