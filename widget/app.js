@@ -59,10 +59,10 @@
                 }, function (err, result) {
                     console.log("BACK BUTTON CLICK", result)
                     if(!result.length) {
-                        $rootScope.showThread = true;
+                        /*$rootScope.showThread = true;
                         $location.path('/');
                         $rootScope.$digest();
-                    } //return goBack();
+                    }*/ return goBack()}
                     if(result[result.length-1].options.isPrivateChat) {
                         console.log("PRIVATE CHAT BACK BUTTON")
                         result.map(item => buildfire.history.pop());
@@ -70,14 +70,16 @@
                         $location.path('/');
                         $rootScope.$broadcast("navigatedBack");
                         //location.reload();
-                    } //else if (result[0].label === 'thread' && $rootScope.navFromNotification === true) 
+                    }
                     else {
                          if(result[0].label === 'thread' || result[0].label === 'members') {
                             $rootScope.showThread = true;
                             $location.path('/');
                             $rootScope.$digest();
                             buildfire.history.pop();
-                        } 
+                        } else {
+                            return goBack();
+                        }
                     }
                 });
             }
