@@ -11,6 +11,11 @@
                 },
                 {
                     id: "",
+                    BFinstanceid: "fda52552-49fe-4957-a0fc-0b244422a852-1633034568937",
+                    name: "Social Media Detox"
+                },
+                {
+                    id: "",
                     BFinstanceid: "fda52552-49fe-4957-a0fc-0b244422a852-1631684914507",
                     name: "Space to Vent"
                 },
