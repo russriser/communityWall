@@ -51,6 +51,11 @@
                 },
                 {
                     id: "",
+                    BFinstanceid: "fda52552-49fe-4957-a0fc-0b244422a852-1631685224572",
+                    name: "Mental Diet"
+                },
+                {
+                    id: "",
                     BFinstanceid: "fda52552-49fe-4957-a0fc-0b244422a852-1631685254576",
                     name: "Suggestions"
                 },

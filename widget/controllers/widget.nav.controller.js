@@ -26,7 +26,29 @@
             $scope.navBF = (instanceId) => {
                 if (instanceId === "Home") {
                     window.buildfire.navigation.navigateHome();
-                } else {
+                } /*else if (instanceId === "Challenges") {
+                    window.buildfire.actionItems.execute(
+                        { 
+                            instanceId: "c01469b6-dec6-443a-865e-7a557501a224-1628194524948",
+                            action: "linkToApp" },
+                        (err) => {
+                          if (err) return console.error(err);
+                        }
+                      );
+                    // window.buildfire.navigation.navigateTo({
+                    //     instanceId: "c01469b6-dec6-443a-865e-7a557501a224-1628194524948",
+                    //     queryString: 'page=Challenges'
+                    // })
+                    // window.buildfire.deeplink.getDeeplink("PAGE-CHALLENGES", (err, result) => {
+                    //     if (err) return console.log(err);
+                    //     if (result) {
+                    //       console.log("Deep link found", result.data);
+                    //         window.location.replace(result.data)
+                    //     } else {
+                    //       console.log("Deep link not found");
+                    //     }
+                    //   });
+                }*/ else {
                     window.buildfire.navigation.navigateTo({ instanceId })
                 }
             }
